@@ -1,15 +1,26 @@
-provider "docker" {
-  host = "tcp://localhost:2375/"
+terraform {
+  required_providers {
+    docker = {
+      source = "kreuzwerker/docker"
+      version = ">= 2.13.0"
+    }
+  }
 }
 
-resource "docker_image" "hello_world" {
-  name         = "seifezz1995/hello_world:latest"
-  keep_locally = true
+
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
+}
+
+
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = false
 }
 
 resource "docker_container" "hello_world" {
   name  = "hello_world_container"
-  image = docker_image.hello_world.latest
+  image = docker_image.nginx.name
   ports {
     internal = 80
     external = 8080

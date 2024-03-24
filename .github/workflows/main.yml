@@ -1,54 +1,58 @@
 name: Publish Docker image
 
 on:
+  # Trigger workflow on push events to the 'master' branch
   push:
     branches: ['master']
 
 jobs:
+  # Job to perform code linting
   lint:
     name: Linting
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
     steps:
-      - name: Set up Node.js
+      - name: Set up Node.js version 20 for linting
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - name: Checkout Code
+          node-version: '20'  # Specify Node.js version for linting tools
+      - name: Checkout entire Git repository history (needed for linters)
         uses: actions/checkout@v4
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
+          fetch-depth: 0  # Download complete Git history
 
-      - name: Lint Code Base
-        uses: super-linter/super-linter@v5.7.2
+      - name: Lint codebase using Super Linter
+        uses: super-linter/super-linter@v5.7.2  # Use Super Linter for code analysis
         env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
+          VALIDATE_ALL_CODEBASE: false  # Optionally skip linting entire codebase
+          DEFAULT_BRANCH: master  # Set the default branch for Super Linter
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Provide GITHUB_TOKEN for authorization
+
+  # Job to build and push the Docker image (depends on successful linting)
   build:
     name: Build Docker Container
-    runs-on: ubuntu-latest
-    needs: lint
+    runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
+    needs: lint  # This job depends on the successful completion of the 'lint' job
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout repository code
+        uses: actions/checkout@v2  # Checkout code for building the Docker image
 
-      # - name: Set up Docker
-      #   uses: docker/setup-docker@v1
+      # Removed commented-out line for setting up Docker (potentially redundant)
 
-      - name: Build and push Docker image
+      - name: Build and tag the Docker image (using the current directory as context)
         run: |
-          docker build -t nginx .
-          docker tag hello seifezz1995/nginx
-       
-      - name: Log into Docker Hub
+          docker build -t nginx .  # Build image named 'nginx' from the current directory
+          docker tag nginx seifezz1995/nginx:latest  # Tag the image for pushing
+
+      - name: Log in to Docker Hub using secrets
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Use secrets for credentials
 
-      - name: Push Docker Image
-        run: docker push seifezz1995/nginx:latest
+      - name: Push the built Docker image to Docker Hub
+        run: docker push seifezz1995/nginx:latest  # Push the image to your repository
+
 
   # deploy:
   #   name: Deploy Application with Terraform

@@ -5,16 +5,6 @@ on:
     branches: ['master']
 
 jobs:
-  lint:
-    name: Linting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Lint Code
-        run: npm init @eslint/config 
-         
   build:
     name: Build Docker Container
     runs-on: ubuntu-latest

@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Lint Code
-        run: npm install -g eslint && eslint .
+        run: npm install -g eslint && eslint . && npm init @eslint/config 
          
   build:
     name: Build Docker Container

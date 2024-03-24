@@ -4,7 +4,11 @@ on:
   push:
     branches: ['master']
 
+<<<<<<< HEAD
 jobs:
+=======
+jobs:      
+>>>>>>> f06c7042fedb47523279b51a17c8abf293ee6cc2
   build:
     name: Build Docker Container
     runs-on: ubuntu-latest

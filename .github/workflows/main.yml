@@ -9,18 +9,18 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
+      - name: Checkout Code
         uses: actions/checkout@v3
-        # Lint your code here (replace with your specific linter)
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
 
       - name: Lint Code Base
         uses: super-linter/super-linter@v5.7.2
-      # - name: Lint Code
-      #   run: | 
-      #     npm init @eslint/config
-      #     npm install -g eslint && eslint .       
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
   build:
     name: Build Docker Container
     runs-on: ubuntu-latest

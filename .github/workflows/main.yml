@@ -15,10 +15,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Lint Code
-        run: | 
-          npm init @eslint/config
-          npm install -g eslint && eslint .       
+      - name: Lint Code Base
+        uses: super-linter/super-linter@v5.7.2
+      # - name: Lint Code
+      #   run: | 
+      #     npm init @eslint/config
+      #     npm install -g eslint && eslint .       
   build:
     name: Build Docker Container
     runs-on: ubuntu-latest

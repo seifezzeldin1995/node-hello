@@ -9,12 +9,14 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        # Lint your code here (replace with your specific linter)
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Lint Code
-        run: npm install -g eslint && eslint .
-         
+        run: npm install -g eslint && eslint .       
   build:
     name: Build Docker Container
     runs-on: ubuntu-latest

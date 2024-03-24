@@ -17,7 +17,7 @@ jobs:
 
       - name: Lint Code
         run: | 
-          npm install @eslint/config
+          npm init @eslint/config
           npm install -g eslint && eslint .       
   build:
     name: Build Docker Container

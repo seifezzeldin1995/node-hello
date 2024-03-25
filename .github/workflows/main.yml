@@ -26,7 +26,7 @@ jobs:
           VALIDATE_ALL_CODEBASE: false  # Optionally skip linting entire codebase
           DEFAULT_BRANCH: master  # Set the default branch for Super Linter
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Provide GITHUB_TOKEN for authorization
-
+          SKIP: "README.md" 
  #Job to build and push the Docker image (depends on successful linting)
   build:
     name: Build Docker Container

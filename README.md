@@ -1,8 +1,7 @@
 
 # CICD pipeline Simple_node
 
-
-Simple CICD pipeline for node.js app 
+Simple CICD pipeline for node app 
 
 ## Create Dockerfile to containerize app
 Using Dockerfile in the repository
@@ -26,11 +25,13 @@ Using terraform file in Docker_terraform directory
 2. Build and push the Docker image to DockerHub
 3. Continuous deployment of app using terraform
 4. Smoke test to build verification testing 
+
 ## Screenshots
 
 [![Screenshot-from-2024-03-25-23-51-59.png](https://i.postimg.cc/85d0SztC/Screenshot-from-2024-03-25-23-51-59.png)](https://postimg.cc/cgHm70qq)
 
 [![Screenshot-from-2024-03-25-23-38-01.png](https://i.postimg.cc/26C100tK/Screenshot-from-2024-03-25-23-38-01.png)](https://postimg.cc/WDfp3wTG)
+
 [![Screenshot-from-2024-03-26-00-04-19.png](https://i.postimg.cc/HndktzSk/Screenshot-from-2024-03-26-00-04-19.png)](https://postimg.cc/phcvWfbw)
 
 [![Screenshot-from-2024-03-25-23-47-35.png](https://i.postimg.cc/3RPJP9fh/Screenshot-from-2024-03-25-23-47-35.png)](https://postimg.cc/BLB0F5G7)

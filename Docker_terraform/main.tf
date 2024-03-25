@@ -13,16 +13,16 @@ provider "docker" {
 }
 
 
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
+resource "docker_image" "simple_node" {
+  name         = "seifezz1995/simple_node:latest"
   keep_locally = false
 }
 
-resource "docker_container" "hello_world" {
-  name  = "hello_world_container"
-  image = docker_image.nginx.name
+resource "docker_container" "simple_node" {
+  name  = "simple_node_container"
+  image = docker_image.simple_node.name
   ports {
-    internal = 80
-    external = 8080
+    internal = 3000
+    external = 80
   }
 }

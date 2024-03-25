@@ -6,52 +6,52 @@ on:
     branches: ['master']
 
 jobs:
-  # Job to perform code linting
-  # lint:
-  #   name: Linting
-  #   runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
-  #   steps:
-  #     - name: Set up Node.js version 20 for linting
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20'  # Specify Node.js version for linting tools
-  #     - name: Checkout entire Git repository history (needed for linters)
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0  # Download complete Git history
+  #Job to perform code linting
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
+    steps:
+      - name: Set up Node.js version 20 for linting
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Specify Node.js version for linting tools
+      - name: Checkout entire Git repository history (needed for linters)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Download complete Git history
 
-  #     - name: Lint codebase using Super Linter
-  #       uses: super-linter/super-linter@v5.7.2  # Use Super Linter for code analysis
-  #       env:
-  #         VALIDATE_ALL_CODEBASE: false  # Optionally skip linting entire codebase
-  #         DEFAULT_BRANCH: master  # Set the default branch for Super Linter
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Provide GITHUB_TOKEN for authorization
+      - name: Lint codebase using Super Linter
+        uses: super-linter/super-linter@v5.7.2  # Use Super Linter for code analysis
+        env:
+          VALIDATE_ALL_CODEBASE: false  # Optionally skip linting entire codebase
+          DEFAULT_BRANCH: master  # Set the default branch for Super Linter
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Provide GITHUB_TOKEN for authorization
 
-  # Job to build and push the Docker image (depends on successful linting)
-  # build:
-  #   name: Build Docker Container
-  #   runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
-  #   # needs: lint  # This job depends on the successful completion of the 'lint' job
+ #Job to build and push the Docker image (depends on successful linting)
+  build:
+    name: Build Docker Container
+    runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
+    # needs: lint  # This job depends on the successful completion of the 'lint' job
 
-  #   steps:
-  #     - name: Checkout repository code
-  #       uses: actions/checkout@v2  # Checkout code for building the Docker image
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v2  # Checkout code for building the Docker image
 
-  #     # Removed commented-out line for setting up Docker (potentially redundant)
+      # Removed commented-out line for setting up Docker (potentially redundant)
 
-  #     - name: Build and tag the Docker image (using the current directory as context)
-  #       run: |
-  #         docker build -t simple_node .  
-  #         docker tag simple_node seifezz1995/simple_node:latest  
+      - name: Build and tag the Docker image (using the current directory as context)
+        run: |
+          docker build -t simple_node .  
+          docker tag simple_node seifezz1995/simple_node:latest  
 
-  #     - name: Log in to Docker Hub using secrets
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}  # Use secrets for credentials
+      - name: Log in to Docker Hub using secrets
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Use secrets for credentials
 
-  #     - name: Push the built Docker image to Docker Hub
-  #       run: docker push seifezz1995/simple_node:latest  # Push the image to your repository
+      - name: Push the built Docker image to Docker Hub
+        run: docker push seifezz1995/simple_node:latest  # Push the image to your repository
 
 
   deploy:
@@ -73,4 +73,3 @@ jobs:
           cd Docker_terraform
           terraform init
           terraform apply -auto-approve
-

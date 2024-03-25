@@ -41,8 +41,8 @@ jobs:
 
       - name: Build and tag the Docker image (using the current directory as context)
         run: |
-          docker build -t nginx .  # Build image named 'nginx' from the current directory
-          docker tag nginx seifezz1995/nginx:latest  # Tag the image for pushing
+          docker build -t simple-node .  
+          docker tag node seifezz1995/simple-node:latest  
 
       - name: Log in to Docker Hub using secrets
         uses: docker/login-action@v2
@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}  # Use secrets for credentials
 
       - name: Push the built Docker image to Docker Hub
-        run: docker push seifezz1995/nginx:latest  # Push the image to your repository
+        run: docker push seifezz1995/simple-node:latest  # Push the image to your repository
 
 
   # deploy:

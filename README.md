@@ -1,4 +1,3 @@
-
 # CICD pipeline Simple_node
 
 Simple CICD pipeline for node app 
@@ -16,9 +15,9 @@ Open [http://localhost:80](http://localhost:80) to view it in your browser.
 
 ## Create IaC to create docker container locally 
 Using terraform file in Docker_terraform directory
-1. Run `terraform init`
-2. Run `terraform plan` 
-3. Run `terraform apply` 
+1. `terraform init`
+2. `terraform plan` 
+3. `terraform apply` 
 
 ## create YAML file for workflow using GitHub Actions
 1. Create first job to lint the code using Super Linter

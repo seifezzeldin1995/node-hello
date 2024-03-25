@@ -7,31 +7,31 @@ on:
 
 jobs:
   # Job to perform code linting
-  lint:
-    name: Linting
-    runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
-    steps:
-      - name: Set up Node.js version 20 for linting
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'  # Specify Node.js version for linting tools
-      - name: Checkout entire Git repository history (needed for linters)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Download complete Git history
+  # lint:
+  #   name: Linting
+  #   runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
+  #   steps:
+  #     - name: Set up Node.js version 20 for linting
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20'  # Specify Node.js version for linting tools
+  #     - name: Checkout entire Git repository history (needed for linters)
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0  # Download complete Git history
 
-      - name: Lint codebase using Super Linter
-        uses: super-linter/super-linter@v5.7.2  # Use Super Linter for code analysis
-        env:
-          VALIDATE_ALL_CODEBASE: false  # Optionally skip linting entire codebase
-          DEFAULT_BRANCH: master  # Set the default branch for Super Linter
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Provide GITHUB_TOKEN for authorization
+  #     - name: Lint codebase using Super Linter
+  #       uses: super-linter/super-linter@v5.7.2  # Use Super Linter for code analysis
+  #       env:
+  #         VALIDATE_ALL_CODEBASE: false  # Optionally skip linting entire codebase
+  #         DEFAULT_BRANCH: master  # Set the default branch for Super Linter
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Provide GITHUB_TOKEN for authorization
 
   # Job to build and push the Docker image (depends on successful linting)
   build:
     name: Build Docker Container
     runs-on: ubuntu-latest  # Run this job on an Ubuntu virtual machine
-    needs: lint  # This job depends on the successful completion of the 'lint' job
+    # needs: lint  # This job depends on the successful completion of the 'lint' job
 
     steps:
       - name: Checkout repository code

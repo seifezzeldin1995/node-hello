@@ -73,3 +73,7 @@ jobs:
           cd Docker_terraform
           terraform init
           terraform apply -auto-approve
+
+      - name: smoke test 
+        run: curl http://localhost
+        

@@ -41,8 +41,8 @@ jobs:
 
       - name: Build and tag the Docker image (using the current directory as context)
         run: |
-          docker build -t simple-node .  
-          docker tag node seifezz1995/simple-node:latest  
+          docker build -t simple_node .  
+          docker tag simple_node seifezz1995/simple_node:latest  
 
       - name: Log in to Docker Hub using secrets
         uses: docker/login-action@v2
@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}  # Use secrets for credentials
 
       - name: Push the built Docker image to Docker Hub
-        run: docker push seifezz1995/simple-node:latest  # Push the image to your repository
+        run: docker push seifezz1995/simple_node:latest  # Push the image to your repository
 
 
   # deploy:

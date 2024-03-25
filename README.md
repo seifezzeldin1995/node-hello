@@ -6,24 +6,24 @@ Simple CICD pipeline for node app
 Using Dockerfile in the repository
 
 ## Locally
-1. `docker build -t my-node-app .` to build the image
-2. `docker run -p 80:3000 my-node-app`  to run the image on port 80
+ `docker build -t my-node-app .` to build the image \
+ `docker run -p 80:3000 my-node-app`  to run the image on port 80
 
 Runs the app in the development mode.\
 Open [http://localhost:80](http://localhost:80) to view it in your browser.
 
 
 ## Create IaC to create docker container locally 
-Using terraform file in Docker_terraform directory
-1. `terraform init`
-2. `terraform plan` 
-3. `terraform apply` 
+Using terraform file in Docker_terraform directory \
+`terraform init` \
+`terraform plan` \
+`terraform apply` 
 
 ## create YAML file for workflow using GitHub Actions
-1. Create first job to lint the code using Super Linter
-2. Build and push the Docker image to DockerHub
-3. Continuous deployment of app using terraform
-4. Smoke test to build verification testing 
+-Create first job to lint the code using Super Linter \
+-Build and push the Docker image to DockerHub \
+-Continuous deployment of app using terraform \
+-Smoke test to build verification testing 
 
 ## Screenshots
 

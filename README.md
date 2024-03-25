@@ -29,7 +29,3 @@ Build and push the Docker image to DockerHub \
 Continuous deployment of app using terraform \
 Smoke test to build verification testing 
 
-
-
-
-
